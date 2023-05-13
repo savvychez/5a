@@ -16,7 +16,7 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
                       <div key={provider.name}>
                       <button className="bg-acid-green w-full my-2 py-3 rounded-3xl border-2 border-acid-black hover:bg-acid-darkened-green " onClick={
                         // eslint-disable-next-line @typescript-eslint/no-misused-promises 
-                        async () => signIn(provider.id).then(() => {}).catch((err) => {console.error(err)})}>
+                        async () => signIn(provider.id).then(() => {console.log("success!")}).catch((err) => {console.error(err)})}>
                           sign in with {provider.name.toLocaleLowerCase()}
                       </button>
                       </div>
