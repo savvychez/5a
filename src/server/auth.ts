@@ -32,32 +32,32 @@ declare module "next-auth" {
   // }
 }
 
-async function postRequest() {
-  const requestBody = {
-    is_auth: true,
-    email: "savvychez@gmail.com",
-  };
+// async function postRequest() {
+//   const requestBody = {
+//     is_auth: true,
+//     email: "savvychez@gmail.com",
+//   };
 
-  try {
-    const response = await fetch("https://vakphsnnqnhsihwlcdkz.functions.supabase.co/get-links-from-email", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(requestBody),
-    });
-    console.log(response)
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
+//   try {
+//     const response = await fetch("https://vakphsnnqnhsihwlcdkz.functions.supabase.co/get-links-from-email", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(requestBody),
+//     });
+//     console.log(response)
+//     if (!response.ok) {
+//       throw new Error(`HTTP error: ${response.status}`);
+//     }
 
-    const data = await response.json();
-    return data
-  } catch (error) {
-    console.error("Request failed:", error);
-    return "ERROR"
-  }
-}
+//     const data = await response.json();
+//     return data
+//   } catch (error) {
+//     console.error("Request failed:", error);
+//     return "ERROR"
+//   }
+// }
 
 /**
  * Options for NextAuth.js used to configure adapters, providers, callbacks, etc.

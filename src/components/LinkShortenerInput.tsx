@@ -49,8 +49,12 @@ const LinkShortenerInput: NextComponentType = () => {
 
   const handleShrinkClick = async () => {
     setShrinkClicked(true);
-    let res = await postRequest()
-    setSlug(res.slug)
+    postRequest().then((res) => {
+      setSlug(res.slug)
+    }).catch((error) => {
+        // Handle error here
+        console.error(error);
+    });
   };
 
   const handleRedoClick = () => {

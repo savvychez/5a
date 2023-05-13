@@ -47,10 +47,17 @@ const Home: NextPage = () => {
     }
   }
 
-  const getRecords = async () => {
-    let res = await postRequest()
-    setRecords(res)
-  }
+  const getRecords = () => {
+    postRequest()
+        .then(res => {
+            setRecords(res);
+        })
+        .catch(error => {
+            // Handle error here
+            console.error(error);
+        });
+  };
+
 
   const handleClick = () => {
     setShrinkClicked(!shrinkClicked);
