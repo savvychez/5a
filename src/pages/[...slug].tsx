@@ -8,7 +8,7 @@ const CatchAllRoute: React.FC = () => {
   const act_slug: string = slug[0] as string;  
 
   useEffect(() => {
-    if( act_slug !== undefined ) {
+    if( act_slug ) {
       window.location.href = "https://vakphsnnqnhsihwlcdkz.functions.supabase.co/shortnr-redirect/" + act_slug;
     }
   }, []);
