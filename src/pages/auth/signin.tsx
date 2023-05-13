@@ -14,7 +14,7 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
                   <h1 className="bg-acid-white pb-4 "><strong>5a | </strong>login with your preferred provider</h1>
                   {Object.values(providers).map((provider) => (
                       <div key={provider.name}>
-                      <button className="bg-acid-green w-full my-2 py-3 rounded-3xl border-2 border-acid-black hover:bg-acid-darkened-green " onClick={() => signIn(provider.id)}>
+                      <button className="bg-acid-green w-full my-2 py-3 rounded-3xl border-2 border-acid-black hover:bg-acid-darkened-green " onClick={async () => await signIn(provider.id)}>
                           sign in with {provider.name.toLocaleLowerCase()}
                       </button>
                       </div>
@@ -29,8 +29,7 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
 }
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  (async () => {
-    const session = await getServerSession(context.req, context.res, authOptions);
+  const session = await getServerSession(context.req, context.res, authOptions);
   
   // If the user is already logged in, redirect.
   // Note: Make sure not to redirect to the same page
@@ -44,5 +43,4 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   return {
     props: { providers: providers ?? [] },
   }
-  })()
 }
