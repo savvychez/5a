@@ -7,6 +7,10 @@ body {
     background-color: #242529;
 }
 
+button:focus {
+  outline: none;
+  border-radius: 3xl; /* replace with your desired border-radius */
+}
 
   
   /* For WebKit-based browsers (Chrome, Safari, etc.) */

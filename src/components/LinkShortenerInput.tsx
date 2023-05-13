@@ -6,9 +6,9 @@ declare module "*.svg" {
 }
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import linkIcon from "../assets/link_icon.svg";
+import linkIcon from "../assets/link_icon.png";
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import redoIcon from "../assets/redo_icon.svg";
+import redoIcon from "../assets/redo_icon2.png";
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import copyIcon from "../assets/copy_icon.svg";
 
@@ -88,6 +88,9 @@ const LinkShortenerInput: NextComponentType = () => {
 
   const handleRedoClick = () => {
     setSlug("");
+    setLongURL("");
+    setShrinkClicked(false);
+    setOpacityClass('opacity-0');
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -104,8 +107,8 @@ const LinkShortenerInput: NextComponentType = () => {
     <div className="input_container relative flex h-auto w-full mt-8 mb-8 border-2 border-acid-black rounded-3xl overflow-hidden focus-within:ring focus-within:ring-slate-300/50 active-within:ring-slate-300/75 ">
       <input value={longURL} onChange={handleInputChange} id="text_input" className="flex-grow block w-full px-5 py-3 bg-acid-white rounded-3xl shadow-sm placeholder-slate-400 focus:outline-none" placeholder="https://longurl.com" type="text" name="" />
       <button onClick={handleShrinkClick} className={`${shrinkClicked ? ' opacity-0 pointer-events-none' : ' opacity-100'} absolute border-none focus:ring-0 focus:shadow-none focus:border-none top-3 right-0 flex ml-5 pr-5 w-min justify-center items-center bg-acid-green focus:outline-none transition-opacity duration-700 z-10 font-medium`}>
-        <p className="px-2 focus:ring-0 focus:shadow-none focus:outline-none">shrink</p>
-        <Image src={linkIcon} alt="Shrink Button Image" className="" />
+        <p className="pl-2 focus:ring-0 focus:shadow-none focus:outline-none">shrink</p>
+        <Image src={linkIcon} width={25} height={25} alt="Shrink Button Image" className="mr-1  " />
       </button>
       <div className={`absolute ${shrinkClicked ? '-top-10 right-0 w-[110%] h-32 rotate-0' : '-top-10 -right-8 xl:-right-6 w-32 h-32 rotate-12'}  bg-acid-green transform border-l-2 border-acid-black transition-all duration-[700ms] z-0`}></div>
       <div className={`${shrinkClicked ? 'opacity-100 delay-700 max-h-full duration-700' : 'opacity-0 pointer-events-none'} absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 transition-opacity  	`}>
@@ -120,7 +123,7 @@ const LinkShortenerInput: NextComponentType = () => {
         }
       </div>
       <button onClick ={handleRedoClick} className="">
-        <Image src={redoIcon} alt="Create new link" className={`${shrinkClicked ? 'opacity-100' : 'opacity-0'} absolute top-[15px]  right-5 w-[16px] delay-[700ms] transition-opacity duration-700 `} />
+        <Image src={redoIcon} width={10} height={10} alt="Create new link" className={`${shrinkClicked ? 'opacity-100' : 'opacity-0'} absolute top-[15px]  right-5 w-[16px] delay-[700ms] transition-opacity duration-700 `} />
       </button>
       <h1>copied!</h1>
     </div>
