@@ -14,7 +14,8 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
                   <h1 className="bg-acid-white pb-4 "><strong>5a | </strong>login with your preferred provider</h1>
                   {Object.values(providers).map((provider) => (
                       <div key={provider.name}>
-                      <button className="bg-acid-green w-full my-2 py-3 rounded-3xl border-2 border-acid-black hover:bg-acid-darkened-green " onClick={async () => await signIn(provider.id)}>
+                      <button className="bg-acid-green w-full my-2 py-3 rounded-3xl border-2 border-acid-black hover:bg-acid-darkened-green " onClick={// eslint-disable-next-line @typescript-eslint/no-misused-promises 
+                        async () => await signIn(provider.id)}>
                           sign in with {provider.name.toLocaleLowerCase()}
                       </button>
                       </div>
