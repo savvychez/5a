@@ -15,7 +15,7 @@ const LinkRecordsViewer: NextPage<Props> = ({ records }) => {
             <h1 className="bg-acid-white pb-2"><strong>your links</strong></h1>
             {Object.values(records).map((record) => (
                 <div key={record.url} className="py-2">
-                    <div className="relative flex bg-acid-white w-full my-2 py-6 rounded-3xl border-2 border-acid-black  overflow-hidden">
+                    <div className="relative flex bg-acid-white w-full my-2 py-6 rounded-md border-2 border-acid-black  overflow-hidden">
                         <div className="tools">
                         </div>
                         <p className="absolute right-4 text-right top-[0.6em]   ">{record.url}</p>

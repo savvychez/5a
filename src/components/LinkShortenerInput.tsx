@@ -90,12 +90,12 @@ const LinkShortenerInput: NextComponentType = () => {
       handleShrinkClick();
     }
   }
-  
+
 
   const handleShrinkClick = () => {
     if(!isValidUrl(longURL)) {
       // alert("Please enter a valid URL");
-      setMessage({text: "Please enter a valid URL", color: "text-red-500"});
+      setMessage({text: "please enter a valid URL", color: "text-red-500"});
       return;
     } 
 
@@ -135,9 +135,9 @@ const LinkShortenerInput: NextComponentType = () => {
 
   return (
     <div className="input_and_message">
-      <div className="input_container relative flex h-auto w-full mt-8 border-2 border-acid-black  overflow-x-hidden focus-within:ring focus-within:ring-slate-300/50 active-within:ring-slate-300/75 ">
-      <input value={longURL} onChange={handleInputChange} onKeyDown={handleShrinkKeyDown} id="text_input" className="flex-grow block w-full px-5 py-3 bg-acid-white shadow-sm placeholder-slate-400 focus:outline-none" placeholder="https://longurl.com" type="text" name="" />
-      <button onClick={handleShrinkClick} className={`${shrinkClicked ? ' opacity-0 pointer-events-none' : ' opacity-100'} absolute border-none focus:ring-0 focus:shadow-none focus:border-none top-3 right-0 flex ml-5 pr-5 w-min justify-center items-center bg-acid-green focus:outline-none transition-opacity duration-700 z-10 font-medium`}>
+      <div className="input_container relative flex h-auto w-full mt-8 border-2 border-acid-black  overflow-hidden focus-within:ring focus-within:ring-slate-300/50 active-within:ring-slate-300/75 rounded-md ">
+      <input value={longURL} onChange={handleInputChange} onKeyDown={handleShrinkKeyDown} id="text_input" className="rounded-md flex-grow block w-full px-5 py-3 bg-acid-white shadow-sm placeholder-slate-400 focus:outline-none" placeholder="https://longurl.com" type="text" name="" />
+      <button onClick={handleShrinkClick} className={`${shrinkClicked ? ' opacity-0 pointer-events-none' : ' opacity-100'} absolute rounded-md border-none focus:ring-0 focus:shadow-none focus:border-none top-3 right-0 flex ml-5 pr-5 w-min justify-center items-center bg-acid-green focus:outline-none transition-opacity duration-700 z-10 font-medium`}>
         <p className="pl-2 focus:ring-0 focus:shadow-none focus:outline-none">shrink</p>
         <Image src={linkIcon} width={25} height={25} alt="Shrink Button Image" className="mr-1  " />
       </button>
