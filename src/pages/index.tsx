@@ -98,9 +98,9 @@ const Home: NextPage = () => {
             
           </div>
           {
-            !(session && session.user && session.user.email) ? 
-              (<p className="justify-self-start mr-auto text-acid-green mt-2 "><button onClick={() => signIn()} className="underline underline-offset-4	hover:no-underline">use an account</button> &nbsp;to save and manage links</p>) :
-            <p className="justify-self-start mr-auto text-acid-green mt-2">{session.user.email} | <button onClick={() => signOut()} className="underline underline-offset-4	hover:no-underline">sign out</button></p>
+            // !(session && session.user && session.user.email) ? 
+              // (<p className="justify-self-start mr-auto text-acid-green mt-2 "><button onClick={() => signIn()} className="underline underline-offset-4	hover:no-underline">use an account</button> &nbsp;to save and manage links</p>) :
+            // <p className="justify-self-start mr-auto text-acid-green mt-2">{session.user.email} | <button onClick={() => signOut()} className="underline underline-offset-4	hover:no-underline">sign out</button></p>
           }
         </div>
         
