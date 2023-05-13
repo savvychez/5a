@@ -20,43 +20,43 @@ const Home: NextPage = () => {
   const { data: session } = useSession();
 
 
-  async function postRequest() {
-    const requestBody = {
-      is_auth: true,
-      email: "savvychez@gmail.com",
-    };
+  // async function postRequest() {
+  //   const requestBody = {
+  //     is_auth: true,
+  //     email: "savvychez@gmail.com",
+  //   };
   
-    try {
-      const response = await fetch("https://vakphsnnqnhsihwlcdkz.functions.supabase.co/get-links-from-email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
-      console.log(response)
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
+  //   try {
+  //     const response = await fetch("https://vakphsnnqnhsihwlcdkz.functions.supabase.co/get-links-from-email", {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(requestBody),
+  //     });
+  //     console.log(response)
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error: ${response.status}`);
+  //     }
   
-      const data = await response.json();
-      return data
-    } catch (error) {
-      console.error("Request failed:", error);
-      return "ERROR"
-    }
-  }
+  //     const data = await response.json();
+  //     return data
+  //   } catch (error) {
+  //     console.error("Request failed:", error);
+  //     return "ERROR"
+  //   }
+  // }
 
-  const getRecords = () => {
-    postRequest()
-        .then(res => {
-            setRecords(res);
-        })
-        .catch(error => {
-            // Handle error here
-            console.error(error);
-        });
-  };
+  // const getRecords = () => {
+    // postRequest()
+    //     .then(res => {
+    //         setRecords(res);
+    //     })
+    //     .catch(error => {
+    //         // Handle error here
+    //         console.error(error);
+    //     });
+    // };
 
 
   const handleClick = () => {
@@ -72,7 +72,7 @@ const Home: NextPage = () => {
     //   setRecords([])
     //   return
     // }
-    getRecords()
+    // getRecords()
   }, [session]);
 
 

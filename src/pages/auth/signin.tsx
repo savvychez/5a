@@ -12,9 +12,12 @@ export default function SignIn({ providers }: InferGetServerSidePropsType<typeof
             <div className="login w-11/12 sm:w-10/12 md:w-7/12 lg:w-6/12 xl:w-4/12 "> 
             <div className="white-box bg-acid-white max-h-96 overflow-x-hidden px-4 py-4 xl:px-6 xl:py-6 rounded-tl-3xl rounded-tr-3xl rounded-br-3xl rounded-bl-md shadow-2xl scroll-shadow">
                   <h1 className="bg-acid-white pb-4 "><strong>5a | </strong>login with your preferred provider</h1>
-                  {Object.values(providers).map((provider) => (
+                  {
+                  /* eslint-disable @typescript-eslint/no-misused-promises */
+                  Object.values(providers).map((provider) => (
                       <div key={provider.name}>
-                      <button className="bg-acid-green w-full my-2 py-3 rounded-3xl border-2 border-acid-black hover:bg-acid-darkened-green " onClick={() => signIn(provider.id)}>
+                      <button className="bg-acid-green w-full my-2 py-3 rounded-3xl border-2 border-acid-black hover:bg-acid-darkened-green " onClick={() => 
+                          signIn(provider.id)}>
                           sign in with {provider.name.toLocaleLowerCase()}
                       </button>
                       </div>
@@ -41,6 +44,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
   const providers = await getProviders();
   
   return {
+    /* eslint-disable @typescript-eslint/no-misused-promises */
     props: { providers: providers ?? [] },
   }
 }

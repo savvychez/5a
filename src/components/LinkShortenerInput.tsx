@@ -1,8 +1,15 @@
 import { type NextComponentType } from "next";
 import Image from "next/image";
 
+declare module "*.svg" {
+  const content: any;
+}
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import linkIcon from "../assets/link_icon.svg";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import redoIcon from "../assets/redo_icon.svg";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import copyIcon from "../assets/copy_icon.svg";
 
 import { useState, useEffect, ChangeEvent } from 'react';
@@ -37,17 +44,39 @@ const LinkShortenerInput: NextComponentType = () => {
       if (!response.ok) {
         throw new Error(`HTTP error: ${response.status}`);
       }
-  
-      const data = await response.json();
-      return data
+      
+      type Response = {
+        slug: string;
+      }
+      const data: Response = await response.json() as Response;
+
+      type RetRes = {
+        slug: string;
+        success: boolean;
+      }
+      const retRes: RetRes = {
+        slug: data.slug,
+        success: true,
+      }
+
+
+      return retRes
     } catch (error) {
       console.error("Request failed:", error);
-      return "ERROR"
+      type RetRes = {
+        slug: string;
+        success: boolean;
+      }
+      const retRes: RetRes = {
+        slug: "",
+        success: false,
+      }
+      return retRes
     }
   }
 
 
-  const handleShrinkClick = async () => {
+  const handleShrinkClick = () => {
     setShrinkClicked(true);
     postRequest().then((res) => {
       setSlug(res.slug)

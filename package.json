@@ -9,6 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@svgr/webpack": "^8.0.1",
     "@t3-oss/env-nextjs": "^0.2.1",
     "clipboard": "^2.0.11",
     "next": "^13.2.4",
