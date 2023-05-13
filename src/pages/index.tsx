@@ -85,7 +85,7 @@ const Home: NextPage = () => {
       </Head>
       <main className={spacegrot.className + " relative flex text-md  min-h-screen flex-col items-center justify-center bg-acid-black "}>
         <div className="main-box  w-11/12 sm:w-10/12 md:w-7/12 lg:w-6/12 xl:w-4/12  xl:text-[1.1em] ">
-        <div className="white-box bg-acid-white max-h-96 overflow-scroll px-4 py-4 rounded-tl-3xl rounded-tr-3xl rounded-br-3xl rounded-bl-md  ">
+        <div className="white-box bg-acid-white max-h-96 overflow-scroll px-6 pt-6 pb-4 rounded-sm ">
             <h1 className="bg-acid-white "><strong>5a | </strong> the link shrinker</h1>
             <LinkShortenerInput/>
             {session && session.user && session.user.email ?
