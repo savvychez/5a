@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    background-color: #242529;
+}
+
+
+  
+  /* For WebKit-based browsers (Chrome, Safari, etc.) */
+/* ::-webkit-scrollbar {
+    width: 10px;
+    background-color: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2); /* Adjust this color and opacity as needed */
+   
