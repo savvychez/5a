@@ -3,7 +3,7 @@ import { NextPage } from "next";
 interface Record {
     slug: string;
     url: string;
-  }
+}
   
 interface Props {
     records: Record[];

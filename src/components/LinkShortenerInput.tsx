@@ -34,7 +34,7 @@ const LinkShortenerInput: NextComponentType = () => {
     };
   
     try {
-      const response = await fetch("https://vakphsnnqnhsihwlcdkz.functions.supabase.co/new-shrink", {
+      const response = await fetch("https://vakphsnnqnhsihwlcdkz.supabase.co/functions/v1/new-shrink", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
