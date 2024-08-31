@@ -10,7 +10,7 @@ const CatchAllRoute: React.FC = () => {
   console.log(act_slug);
   useEffect(() => {
     if( act_slug ) {
-      window.location.href = "https://vakphsnnqnhsihwlcdkz.supabase.co/functions/v1/shortnr-redirect" + act_slug;
+      window.location.href = "https://vakphsnnqnhsihwlcdkz.supabase.co/functions/v1/shortnr-redirect/" + act_slug;
     }
   }, [act_slug]);
 
