@@ -2,8 +2,8 @@ import { type NextPage } from "next";
 import { Space_Grotesk, Spectral } from 'next/font/google';
 import Head from "next/head";
 
-import { useEffect, useState } from 'react';
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useEffect, useRef, useState } from 'react';
+// import { useSession, signIn, signOut } from "next-auth/react"
 import LinkShortenerInput from "~/components/LinkShortenerInput";
 import { UploadButton } from "~/components/uploadthing";
 
@@ -16,16 +16,28 @@ const spacegrot = Space_Grotesk({
 
 const Home: NextPage = () => {
   const [shrinkClicked, setShrinkClicked] = useState(false);
-  const [records, setRecords] = useState([{"url":"hello", "slug":"WX"}, {"url":"otherr", "slug":"as"}, {"url":"z3", "slug":"WXsd"}]);
-  const { data: session } = useSession();
+  const [records, setRecords] = useState([{ "url": "hello", "slug": "WX" }, { "url": "otherr", "slug": "as" }, { "url": "z3", "slug": "WXsd" }]);
+  // const { data: session } = useSession();
 
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const childRef = useRef(null);
+
+  const handleFileUpload = (event: { target: { files: any[]; }; }) => {
+    const file = event.target.files[0];
+    if (file) {
+      // Once file is uploaded, call the child function
+      if (childRef.current) {
+        childRef.current.handleFileUpload(file);
+      }
+    }
+  };
 
   // async function postRequest() {
   //   const requestBody = {
   //     is_auth: true,
   //     email: "savvychez@gmail.com",
   //   };
-  
+
   //   try {
   //     const response = await fetch("https://vakphsnnqnhsihwlcdkz.functions.supabase.co/get-links-from-email", {
   //       method: "POST",
@@ -38,7 +50,7 @@ const Home: NextPage = () => {
   //     if (!response.ok) {
   //       throw new Error(`HTTP error: ${response.status}`);
   //     }
-  
+
   //     const data = await response.json();
   //     return data
   //   } catch (error) {
@@ -48,43 +60,32 @@ const Home: NextPage = () => {
   // }
 
   // const getRecords = () => {
-    // postRequest()
-    //     .then(res => {
-    //         setRecords(res);
-    //     })
-    //     .catch(error => {
-    //         // Handle error here
-    //         console.error(error);
-    //     });
-    // };
+  // postRequest()
+  //     .then(res => {
+  //         setRecords(res);
+  //     })
+  //     .catch(error => {
+  //         // Handle error here
+  //         console.error(error);
+  //     });
+  // };
 
 
-  const handleClick = () => {
-    if (window.getSelection) {
-      const selection = window.getSelection();
-      if (selection) {
-        selection.removeAllRanges();
-      }
-    } else if (document.getSelection()) {
-      const selection = document.getSelection();
-      if (selection) {
-        selection.empty();
-      }
+  const uploadFile = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
     }
-    setShrinkClicked(!shrinkClicked);
-    // alert("hey")
-    // alert(JSON.stringify(session))
   };
 
 
 
-  useEffect(() => {
-    // if (!(session && session.user && session.user.email)) {
-    //   setRecords([])
-    //   return
-    // }
-    // getRecords()
-  }, [session]);
+  // useEffect(() => {
+  //   // if (!(session && session.user && session.user.email)) {
+  //   //   setRecords([])
+  //   //   return
+  //   // }
+  //   // getRecords()
+  // }, [session]);
 
 
   return (
@@ -95,12 +96,12 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={spacegrot.className + " text-md bg-acid-black"}>
-      <div className="main-box absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-10/12 md:w-7/12 lg:w-6/12 xl:w-4/12  xl:text-[1.1em] max-h-screen overflow-scroll">
-        <div className="white-box bg-acid-white max-h-96 overflow-scroll px-6 pt-6 pb-4 rounded-sm ">
+        <div className="main-box absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-10/12 md:w-7/12 lg:w-6/12 xl:w-4/12  xl:text-[1.1em] max-h-screen overflow-scroll">
+          <div className="white-box bg-acid-white max-h-96 overflow-scroll px-6 pt-6 pb-4 rounded-sm ">
             <h1 className="bg-acid-white "><strong>5a | </strong> shrink files and links</h1>
-            <LinkShortenerInput/>
+            <LinkShortenerInput ref={childRef} />
             {/* <UploadButton endpoint="fileUploader"/> */}
-            
+
             {/* {session && session.user && session.user.email ?
             (
              <LinkRecordsViewer records={records}/>
@@ -108,15 +109,21 @@ const Home: NextPage = () => {
             :
             null
             } */}
-            
+
           </div>
           {
             // !(session && session.user && session.user.email) ? 
-              // (<p className="justify-self-start mr-auto text-acid-green mt-2 "><button onClick={() => signIn()} className="underline underline-offset-4	hover:no-underline">use an account</button> &nbsp;to save and manage links</p>) :
-            // <p className="justify-self-start mr-auto text-acid-green mt-2">{session.user.email} | <button onClick={() => signOut()} className="underline underline-offset-4	hover:no-underline">sign out</button></p>
+            // (<p className="justify-self-start mr-auto text-acid-green mt-2 "><button onClick={() => signIn()} className="underline underline-offset-4	hover:no-underline">use an account</button> &nbsp;to save and manage links</p>) :
+            <p className=" mr-auto text-acid-green mt-2"><button onClick={() => uploadFile()} className="underline underline-offset-4	hover:no-underline">shrink a file</button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                onChange={handleFileUpload}
+                style={{ display: 'none' }}
+              /></p>
           }
         </div>
-        
+
       </main>
     </>
   );

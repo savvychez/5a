@@ -17,13 +17,13 @@ import redoIcon from "../assets/redo_icon2.png";
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import copyIcon from "../assets/copy_icon.svg";
 
-import { useState, useEffect, ChangeEvent, useCallback } from 'react';
+import { useState, useEffect, ChangeEvent, useCallback, forwardRef, useImperativeHandle } from 'react';
 import ReactLoading from 'react-loading';
 import Clipboard from 'react-clipboard.js';
 import { set } from "zod";
 
 
-const LinkShortenerInput: NextComponentType = () => {
+const LinkShortenerInput: NextComponentType = forwardRef((props, ref) => {
   const [shrinkClicked, setShrinkClicked] = useState(false);
   const [opacityClass, setOpacityClass] = useState('opacity-0');
   const [records, setRecords] = useState([{"title":"hello"}]);
@@ -36,8 +36,6 @@ const LinkShortenerInput: NextComponentType = () => {
     setShrinkClicked(true);
     if (acceptedFiles[0]) {
       startUpload([acceptedFiles[0]]).then((url) => {
-        // console.log("uploaded successfully");
-        // console.log("file url is " + url);
         if (url && url[0]) {
           postRequest(url[0].url).then((res) => {
             setSlug(res.slug)
@@ -57,6 +55,33 @@ const LinkShortenerInput: NextComponentType = () => {
     //   setFile(acceptedFiles[0]);
     // }
   }, []);
+
+  const handleFileUpload = (file: File) => {
+    setShrinkClicked(true);
+    if (file) {
+      console.log("file is", file);
+      startUpload([file]).then((url) => {
+        if (url && url[0]) {
+          postRequest(url[0].url).then((res) => {
+            setSlug(res.slug)
+            setFile(null);
+          }).catch((error) => {
+            console.error(error);
+          })
+        }
+      }
+      ).catch((error) => {
+        console.error("error here");
+        console.error(error);
+        setFile(null);
+      });
+      return;
+    }
+  };
+
+  useImperativeHandle(ref, () => ({
+    handleFileUpload,
+  }));
 
   const { startUpload, routeConfig } = useUploadThing("fileUploader", {
     onClientUploadComplete: (url) => {
@@ -242,6 +267,6 @@ const LinkShortenerInput: NextComponentType = () => {
       <h1 className={"block mb-1 mt-3 text-md transition-opacity duration-100 " + message.color}>{message.text}&nbsp;</h1>
     </div>
   )
-}
+})
 
 export default LinkShortenerInput;
