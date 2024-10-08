@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useEffect, useState } from 'react';
 import { useSession, signIn, signOut } from "next-auth/react"
 import LinkShortenerInput from "~/components/LinkShortenerInput";
-import LinkRecordsViewer from "~/components/LinkRecordsViewer";
+import { UploadButton } from "~/components/uploadthing";
 
 const spacegrot = Space_Grotesk({
   subsets: ['latin'],
@@ -60,6 +60,17 @@ const Home: NextPage = () => {
 
 
   const handleClick = () => {
+    if (window.getSelection) {
+      const selection = window.getSelection();
+      if (selection) {
+        selection.removeAllRanges();
+      }
+    } else if (document.getSelection()) {
+      const selection = document.getSelection();
+      if (selection) {
+        selection.empty();
+      }
+    }
     setShrinkClicked(!shrinkClicked);
     // alert("hey")
     // alert(JSON.stringify(session))
@@ -86,15 +97,17 @@ const Home: NextPage = () => {
       <main className={spacegrot.className + " text-md bg-acid-black"}>
       <div className="main-box absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-11/12 sm:w-10/12 md:w-7/12 lg:w-6/12 xl:w-4/12  xl:text-[1.1em] max-h-screen overflow-scroll">
         <div className="white-box bg-acid-white max-h-96 overflow-scroll px-6 pt-6 pb-4 rounded-sm ">
-            <h1 className="bg-acid-white "><strong>5a | </strong> the link shrinker</h1>
+            <h1 className="bg-acid-white "><strong>5a | </strong> shrink files and links</h1>
             <LinkShortenerInput/>
-            {session && session.user && session.user.email ?
+            {/* <UploadButton endpoint="fileUploader"/> */}
+            
+            {/* {session && session.user && session.user.email ?
             (
              <LinkRecordsViewer records={records}/>
             )
             :
             null
-            }
+            } */}
             
           </div>
           {
