@@ -11,7 +11,7 @@ export const ourFileRouter = {
   // Define as many FileRoutes as you like, each with a unique routeSlug
   fileUploader: f({ blob: { maxFileSize: "128MB" } })
     // Set permissions and file types for this FileRoute
-    .onUploadComplete(async ({ metadata, file }) => {
+    .onUploadComplete( ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
       // console.log("Upload complete for userId:", metadata.userId);
 
